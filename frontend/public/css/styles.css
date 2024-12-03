@@ -1,0 +1,444 @@
+:root {
+    --primary-blue: #4fc3f7;
+    --secondary-blue: #29b6f6;
+    --primary-pink: #ff80ab;
+    --secondary-pink: #ff4081;
+    --primary-amber: #ffd54f;
+    --secondary-amber: #ffca28;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+    color: #333;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header Styles */
+.app-header {
+    background: linear-gradient(135deg, var(--primary-pink), var(--primary-blue), var(--primary-amber));
+    padding: 1rem 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.logo {
+    color: white;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 0;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    letter-spacing: 2px;
+}
+
+/* Main Container */
+.container {
+    flex: 1;
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 20px;
+}
+
+/* Generator Control */
+.generator-control {
+    background: white;
+    padding: 15px 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+/* Statistics Panel */
+.stats-panel {
+    background: white;
+    padding: 15px 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    margin-bottom: 25px;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    padding: 10px;
+}
+
+.stat-item {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    text-align: center;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.stat-label {
+    font-size: 16px;
+    font-weight: 600;
+    color: #495057;
+}
+
+.stat-value {
+    font-size: 28px;
+    font-weight: 700;
+    transition: color 0.3s ease;
+    line-height: 1.2;
+    padding: 4px 8px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.stat-value.good {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.stat-value.warning {
+    background-color: #FFA500;
+    color: black;
+}
+
+.stat-value.critical {
+    background-color: #FF0000;
+    color: white;
+}
+
+.stat-target {
+    font-size: 13px;
+    color: #6c757d;
+    padding-top: 5px;
+    border-top: 1px solid #e9ecef;
+}
+
+/* Status Colors with Card Border */
+.stat-item.excellent {
+    border-left: 4px solid #28a745;
+}
+
+.stat-item.good {
+    border-left: 4px solid #17a2b8;
+}
+
+.stat-item.warning {
+    border-left: 4px solid #ffc107;
+}
+
+.stat-item.critical {
+    border-left: 4px solid #dc3545;
+}
+
+/* Chart Window - Restored Original Styling */
+.chart-window {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    margin-bottom: 25px;
+    overflow: hidden;
+    width: 100%;
+}
+
+/* Tabs - Restored */
+.tabs {
+    display: flex;
+    padding: 0;
+    background: #f8f9fa;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.tab-btn {
+    padding: 15px 25px;
+    border: none;
+    background: transparent;
+    color: #6c757d;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    position: relative;
+    border-right: 1px solid #e9ecef;
+}
+
+.tab-btn:hover {
+    background: rgba(33, 150, 243, 0.05);
+    color: #2196F3;
+}
+
+.tab-btn.active {
+    background: white;
+    color: #2196F3;
+}
+
+.tab-btn.active:after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: #2196F3;
+}
+
+/* Views Container */
+.views-container {
+    padding: 25px;
+    background: white;
+    min-height: 500px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.view {
+    width: 100%;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.view.active {
+    display: block;
+    opacity: 1;
+}
+
+/* Dial and Chart */
+.dial-container {
+    width: 100%;
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+#dialCanvas {
+    width: 100%;
+    max-width: 800px;
+    height: 100%;
+    max-height: 400px;
+}
+
+.chart-container {
+    width: 100%;
+}
+
+.chart-controls {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.download-btn {
+    padding: 8px 16px;
+    background: #2196F3;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.2s;
+}
+
+.download-btn:hover {
+    background: #1976D2;
+}
+
+/* Process Status */
+.process-status {
+    padding: 15px;
+    color: #6c757d;
+    font-size: 14px;
+    text-align: center;
+    border-top: 1px solid #e9ecef;
+}
+
+/* Measurements Table */
+.measurements-container {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.measurements-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-top: 15px;
+}
+
+.measurements-table th,
+.measurements-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.measurements-table th {
+    background: #f8f9fa;
+    font-weight: 500;
+    color: #495057;
+}
+
+/* Footer */
+.app-footer {
+    background: linear-gradient(135deg, var(--primary-amber), var(--primary-blue), var(--primary-pink));
+    color: white;
+    padding: 1rem 0;
+    text-align: center;
+    box-shadow: 0 -2px 8px rgba(0,0,0,0.1);
+    margin-top: auto;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.footer-content p {
+    margin: 0;
+    font-size: 0.9rem;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+/* Toggle Switch */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 30px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #e0e0e0;
+    transition: .3s;
+    border: 1px solid #ddd;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 22px;
+    width: 22px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: .3s;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+input:checked + .slider {
+    background-color: #2196F3;
+}
+
+input:checked + .slider:before {
+    transform: translateX(30px);
+}
+
+.slider.round {
+    border-radius: 30px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .logo {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .tab-btn {
+        padding: 12px 15px;
+        font-size: 13px;
+    }
+}
+
+/* Chart Window Fixes */
+.chart-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.chart-wrapper img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+/* Process Tabs specific styling */
+.process-tabs {
+    margin-top: 20px;
+    border-top: 1px solid #e9ecef;
+    padding-top: 15px;
+}
+
+.process-tabs .tab-btn {
+    padding: 10px 20px;
+    margin: 0 5px;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    background: #f8f9fa;
+    color: #6c757d;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.process-tabs .tab-btn:hover {
+    background: #e9ecef;
+    color: #495057;
+}
+
+.process-tabs .tab-btn.active {
+    background: #2196F3;
+    color: white;
+    border-color: #1976D2;
+}
+
+.process-status {
+    margin-top: 10px;
+    text-align: center;
+    color: #6c757d;
+}

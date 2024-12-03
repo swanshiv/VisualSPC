@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>xSPC Charts Viewer</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="app-header">
+        <div class="header-content">
+            <h1 class="logo">xSPC</h1>
+            <div class="header-gradient"></div>
+        </div>
+    </header>
+
+    <div class="container">
+        <h1>SPC Data Entry and Analysis</h1>
+        
+        <!-- Generator Toggle Switch -->
+        <div class="generator-control">
+            <label class="switch">
+                <input type="checkbox" id="generatorToggle" onchange="toggleGenerator()">
+                <span class="slider round"></span>
+            </label>
+            <span id="generatorStatus">Generator: Off</span>
+        </div>
+
+        <!-- Statistics Panel -->
+        <div class="stats-panel">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-label">Mean</div>
+                    <div class="stat-value" id="statMean">-</div>
+                    <div class="stat-target" id="meanTarget">Target: 100.00</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label">Std Dev</div>
+                    <div class="stat-value" id="statStdDev">-</div>
+                    <div class="stat-target" id="stdDevTarget">Target: < 3.00</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label">Cp</div>
+                    <div class="stat-value" id="statCp">-</div>
+                    <div class="stat-target">Target: > 1.33</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label">Cpk</div>
+                    <div class="stat-value" id="statCpk">-</div>
+                    <div class="stat-target">Target: > 1.33</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Chart Window -->
+        <div class="chart-window">
+            <!-- Visualization Tabs at Top -->
+            <div class="tabs viz-tabs">
+                <button class="tab-btn active" onclick="switchView('dial')">Dial View</button>
+                <button class="tab-btn" onclick="switchView('chart')">Run Chart</button>
+            </div>
+
+            <!-- Views Container -->
+            <div class="views-container">
+                <!-- Dial View -->
+                <div id="dialView" class="view active">
+                    <div class="dial-container">
+                        <canvas id="dialCanvas"></canvas>
+                    </div>
+                </div>
+
+                <!-- Run Chart View -->
+                <div id="chartView" class="view">
+                    <div class="chart-container">
+                        <div class="chart-controls">
+                            <button onclick="downloadChart()" class="download-btn">Download Chart</button>
+                            <button onclick="downloadData()" class="download-btn">Download Data</button>
+                        </div>
+                        <div class="chart-wrapper">
+                            <img id="chart" />
+                            <div id="chartStatus" class="status-message"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Process Selection Tabs at Bottom -->
+            <div class="tabs process-tabs">
+                <button class="tab-btn" onclick="selectProcess('Process A')">Process A</button>
+                <button class="tab-btn" onclick="selectProcess('Process B')">Process B</button>
+                <button class="tab-btn" onclick="selectProcess('Process C')">Process C</button>
+            </div>
+            <p class="process-status">Currently monitoring: <span id="currentProcess">None</span></p>
+        </div>
+
+        <!-- Measurements Table -->
+        <div class="measurements-container">
+            <h2>Latest Measurements</h2>
+            <div class="table-controls">
+                <button onclick="downloadMeasurements()" class="download-btn">Download Measurements</button>
+            </div>
+            <table class="measurements-table" id="measurementsTable">
+                <thead>
+                    <tr>
+                        <th>Time</th>
+                        <th>Value</th>
+                        <th>Lower Spec</th>
+                        <th>Upper Spec</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="measurementsBody">
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+        <div class="footer-content">
+            <p>&copy; 2024 Shivranjan Kolvankar. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/dial.js"></script>
+    <script src="/js/main.js"></script>
+</body>
+</html> 
